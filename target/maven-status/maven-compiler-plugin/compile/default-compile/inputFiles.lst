@@ -1,0 +1,15 @@
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/resources/IdentityClient.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/dtos/Identity.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/SplitApiClient.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/dtos/Attribute.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/dtos/Environment.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/client/interceptors/AddSplitHeadersFilter.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/resources/EnvironmentClient.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/SplitApiClientConfig.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/client/utils/Json.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/resources/TrafficTypeClient.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/client/HttpClient.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/dtos/result/FailureDTO.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/dtos/TrafficType.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/resources/AttributeClient.java
+/Users/HJewkes/projects/java-api/src/main/java/io/split/api/dtos/result/ResultDTO.java
