@@ -16,7 +16,7 @@ public class SplitApiClientConfig {
     private final boolean _debugEnabled;
 
     // To be set during startup
-    private static String splitSdkVersion;
+    public static String splitSdkVersion;
 
     public static Builder builder() {
         return new Builder();

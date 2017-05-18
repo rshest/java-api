@@ -1,6 +1,7 @@
 package io.split.api.client;
 
 import io.split.api.SplitApiClientConfig;
+import io.split.api.client.interceptors.AddSplitHeadersFilter;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -17,37 +18,48 @@ public class SplitApiClient {
     private final CloseableHttpClient _httpClient;
     private final URI _rootTarget;
 
+    private final TrafficTypeClient trafficTypeClient;
+    private final EnvironmentClient environmentClient;
+    private final AttributeClient attributeClient;
+    private final IdentityClient identityClient;
+
     public SplitApiClient(String apiToken, SplitApiClientConfig config) {
         _config = config;
 
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(config.connectionTimeout())
                 .build();
-`
+
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
         cm.setMaxTotal(20);
         cm.setDefaultMaxPerRoute(20);
         _httpClient = HttpClients.custom()
                 .setConnectionManager(cm)
                 .setDefaultRequestConfig(requestConfig)
+                .addInterceptorLast(AddSplitHeadersFilter.instance(apiToken))
                 .build();
 
         _rootTarget = URI.create(config.endpoint());
+
+        trafficTypeClient = new TrafficTypeClient();
+        environmentClient = new EnvironmentClient();
+        attributeClient = new AttributeClient();
+        identityClient = new IdentityClient(_httpClient, _rootTarget);
     }
 
     public TrafficTypeClient trafficTypes() {
-        return new TrafficTypeClient();
+        return trafficTypeClient;
     }
 
     public EnvironmentClient environments() {
-        return new EnvironmentClient();
+        return environmentClient;
     }
 
     public AttributeClient attributes() {
-        return new AttributeClient();
+        return attributeClient;
     }
 
     public IdentityClient identities() {
-        return new IdentityClient();
+        return identityClient;
     }
 }

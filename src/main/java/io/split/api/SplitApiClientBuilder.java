@@ -12,6 +12,6 @@ public class SplitApiClientBuilder {
     }
 
     public static synchronized SplitApiClient client(String apiToken, SplitApiClientConfig config) {
-        return new SplitApiClient(String apiToken, config);
+        return new SplitApiClient(apiToken, config);
     }
 }
