@@ -1,13 +1,20 @@
-package io.split.api.client;
+package io.split.api.resources;
 
 import io.split.api.dtos.Attribute;
 import io.split.api.dtos.TrafficType;
+import io.split.client.HttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class AttributeClient {
+    private HttpClient _client;
+
+    public AttributeClient(HttpClient client) {
+        this._client = client;
+    }
+
     public List<Attribute> list(String trafficTypeId) {
         return new ArrayList<>();
     }
