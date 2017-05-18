@@ -18,7 +18,7 @@ public class AddSplitHeadersFilter implements HttpRequestInterceptor {
     private static final String CLIENT_MACHINE_IP_HEADER = "SplitSDKMachineIP";
     private static final String CLIENT_VERSION = "SplitSDKVersion";
     private static final String SDK_SPEC_VERSION = "SplitSDKSpecVersion";
-    private static final String OUR_SDK_SPEC_VERSION = "1.3";
+    private static final String OUR_SDK_SPEC_VERSION = "1.0";
 
     private final String _apiTokenBearer;
     private final String _hostname;

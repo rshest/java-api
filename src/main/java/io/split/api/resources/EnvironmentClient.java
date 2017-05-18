@@ -2,8 +2,8 @@ package io.split.api.resources;
 
 import io.split.api.dtos.Environment;
 import io.split.client.HttpClient;
+import io.split.client.utils.Json;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +15,8 @@ public class EnvironmentClient {
     }
 
     public List<Environment> list() {
-        return new ArrayList<>();
+        String result = _client.get("/v1/environments");
+        return Json.parseList(result, Environment.class);
     }
 
     public Environment get(String name) {

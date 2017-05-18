@@ -2,8 +2,8 @@ package io.split.api.resources;
 
 import io.split.api.dtos.TrafficType;
 import io.split.client.HttpClient;
+import io.split.client.utils.Json;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +15,8 @@ public class TrafficTypeClient {
     }
 
     public List<TrafficType> list() {
-        return new ArrayList<>();
+        String result = _client.get("/v1/trafficTypes");
+        return Json.parseList(result, TrafficType.class);
     }
 
     public TrafficType get(String name) {
