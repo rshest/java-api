@@ -1,4 +1,4 @@
-package io.split.client.interceptors;
+package io.split.api.client.interceptors;
 
 import io.split.api.SplitApiClientConfig;
 import org.apache.http.HttpException;

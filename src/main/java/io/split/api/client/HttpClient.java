@@ -1,8 +1,8 @@
-package io.split.client;
+package io.split.api.client;
 
 import io.split.api.SplitApiClientConfig;
-import io.split.client.interceptors.AddSplitHeadersFilter;
-import io.split.client.utils.Json;
+import io.split.api.client.interceptors.AddSplitHeadersFilter;
+import io.split.api.client.utils.Json;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;

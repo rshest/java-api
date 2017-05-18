@@ -1,0 +1,7 @@
+io.split.api
+io.split.api.client
+io.split.api.client.interceptors
+io.split.api.client.utils
+io.split.api.dtos
+io.split.api.dtos.result
+io.split.api.resources

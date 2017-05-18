@@ -1,4 +1,4 @@
-package io.split.client.utils;
+package io.split.api.client.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

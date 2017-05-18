@@ -1,8 +1,8 @@
 package io.split.api.resources;
 
 import io.split.api.dtos.TrafficType;
-import io.split.client.HttpClient;
-import io.split.client.utils.Json;
+import io.split.api.client.HttpClient;
+import io.split.api.client.utils.Json;
 
 import java.util.List;
 import java.util.Objects;
