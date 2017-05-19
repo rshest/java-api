@@ -27,11 +27,11 @@ public class Attribute {
         return trafficTypeId;
     }
 
-    public Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    public Builder builder(Attribute other) {
+    public static Builder builder(Attribute other) {
         return new Builder(other);
     }
 

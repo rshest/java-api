@@ -12,11 +12,11 @@ public class TrafficType {
         return name;
     }
 
-    public Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    public Builder builder(TrafficType other) {
+    public static Builder builder(TrafficType other) {
         return new Builder(other);
     }
 

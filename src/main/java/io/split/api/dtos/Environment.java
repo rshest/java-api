@@ -12,11 +12,11 @@ public class Environment {
         return name;
     }
 
-    public Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    public Builder builder(Environment other) {
+    public static Builder builder(Environment other) {
         return new Builder(other);
     }
 

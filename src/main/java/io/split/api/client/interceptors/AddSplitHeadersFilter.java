@@ -49,7 +49,6 @@ public class AddSplitHeadersFilter implements HttpRequestInterceptor {
     public void process(HttpRequest request, HttpContext httpContext) throws HttpException, IOException {
         request.addHeader("Authorization", _apiTokenBearer);
         request.addHeader(CLIENT_VERSION, SplitApiClientConfig.splitSdkVersion);
-        ;
         request.addHeader(SDK_SPEC_VERSION, OUR_SDK_SPEC_VERSION);
 
         if (_hostname != null) {
@@ -59,6 +58,5 @@ public class AddSplitHeadersFilter implements HttpRequestInterceptor {
         if (_ip != null) {
             request.addHeader(CLIENT_MACHINE_IP_HEADER, _ip);
         }
-
     }
 }
