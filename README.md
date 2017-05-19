@@ -26,13 +26,13 @@ Split builds on feature flags to create the platform for controlled rollouts, so
 
 Split has built and maintains a SDKs for:
 
-* Java [Github](https://github.com/splitio/api-java) [Docs](http://docs.split.io/docs/java-sdk-guide)
-* Javascript [Github](https://github.com/splitio/api-javascript) [Docs](http://docs.split.io/docs/javascript-sdk-overview)
-* Node [Github](https://github.com/splitio/api-javascript) [Docs](http://docs.split.io/docs/nodejs-sdk-overview)
-* .NET [Github](https://github.com/splitio/api-.net) [Docs](http://docs.split.io/docs/net-sdk-overview)
-* Ruby [Github](https://github.com/splitio/api-ruby) [Docs](http://docs.split.io/docs/ruby-sdk-overview)
-* PHP [Github](https://github.com/splitio/api-php) [Docs](http://docs.split.io/docs/php-sdk-overview)
-* Python [Github](https://github.com/splitio/api-python) [Docs](http://docs.split.io/docs/python-sdk-overview)
+* Java [Github](https://github.com/splitio/java-api) [Docs](http://docs.split.io/docs/java-sdk-guide)
+* Javascript [Github](https://github.com/splitio/javascript-api) [Docs](http://docs.split.io/docs/javascript-sdk-overview)
+* Node [Github](https://github.com/splitio/javascript-api) [Docs](http://docs.split.io/docs/nodejs-sdk-overview)
+* .NET [Github](https://github.com/splitio/.net-api) [Docs](http://docs.split.io/docs/net-sdk-overview)
+* Ruby [Github](https://github.com/splitio/ruby-api) [Docs](http://docs.split.io/docs/ruby-sdk-overview)
+* PHP [Github](https://github.com/splitio/php-api) [Docs](http://docs.split.io/docs/php-sdk-overview)
+* Python [Github](https://github.com/splitio/python-api) [Docs](http://docs.split.io/docs/python-sdk-overview)
 
 For a comprehensive list of opensource projects visit our [Github page](https://github.com/splitio?utf8=%E2%9C%93&query=%20only%3Apublic%20).
 
