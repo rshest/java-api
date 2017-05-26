@@ -1,5 +1,8 @@
 package io.split.api.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.internal.Nullable;
+
 public class TrafficType {
     private String id;
     private String name;
@@ -15,14 +18,18 @@ public class TrafficType {
         this.displayAttributeId = builder.displayAttributeId;
     }
 
+    @JsonProperty
     public String id() {
         return id;
     }
 
+    @JsonProperty
     public String name() {
         return name;
     }
 
+    @Nullable
+    @JsonProperty
     public String displayAttributeId() {
         return displayAttributeId;
     }

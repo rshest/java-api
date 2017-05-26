@@ -1,60 +1,82 @@
 package io.split.api.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.internal.Nullable;
+
 public class Attribute {
     private String id;
+    private String organizationId;
     private String trafficTypeId;
-    private String dataType;
     private String displayName;
     private String description;
-    private boolean isSearchable;
+    private String dataType;
+    private boolean searchable;
 
     public Attribute() {
-
+        searchable = false;
     }
 
     private Attribute(Builder builder) {
         this.id = builder.id;
-        this.displayName = builder.displayName;
-        this.dataType = builder.dataType;
-        this.description = builder.description;
+        this.organizationId = builder.organizationId;
         this.trafficTypeId = builder.trafficTypeId;
-        this.isSearchable = builder.isSearchable;
+        this.displayName = builder.displayName;
+        this.description = builder.description;
+        this.dataType = builder.dataType;
+        this.searchable = builder.searchable;
     }
 
+    @JsonProperty
     public String id() {
-        return id;
+        return this.id;
     }
 
+    @Nullable
+    @JsonProperty
+    public String organizationId() {
+        return this.organizationId;
+    }
+
+    @Nullable
+    @JsonProperty
     public String trafficTypeId() {
-        return trafficTypeId;
+        return this.trafficTypeId;
     }
 
-    public String dataType() {
-        return dataType;
-    }
-
+    @Nullable
+    @JsonProperty
     public String displayName() {
-        return displayName;
+        return this.displayName;
     }
 
+    @Nullable
+    @JsonProperty
     public String description() {
-        return description;
+        return this.description;
     }
 
-    public boolean searchable() {
-        return isSearchable;
+    @Nullable
+    @JsonProperty
+    public String dataType() {
+        return this.dataType;
+    }
+
+    @Nullable
+    @JsonProperty("isSearchable")
+    public boolean isSearchable() {
+        return this.searchable;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setTrafficTypeId(String trafficTypeId) {
-        this.trafficTypeId = trafficTypeId;
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setTrafficTypeId(String trafficTypeId) {
+        this.trafficTypeId = trafficTypeId;
     }
 
     public void setDisplayName(String displayName) {
@@ -65,8 +87,12 @@ public class Attribute {
         this.description = description;
     }
 
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
+
     public void setSearchable(boolean searchable) {
-        isSearchable = searchable;
+        this.searchable = searchable;
     }
 
     public static Builder builder() {
@@ -79,19 +105,20 @@ public class Attribute {
 
     public static class Builder {
         private String id;
+        private String organizationId;
         private String trafficTypeId;
-        private String dataType;
         private String displayName;
         private String description;
-        private boolean isSearchable;
+        private String dataType;
+        private boolean searchable;
 
         public Builder id(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder trafficType(TrafficType trafficType) {
-            this.trafficTypeId = trafficType.id();
+        public Builder organizationId(String organizationId) {
+            this.organizationId = organizationId;
             return this;
         }
 
@@ -105,18 +132,18 @@ public class Attribute {
             return this;
         }
 
-        public Builder dataType(String dataType) {
-            this.dataType = dataType;
-            return this;
-        }
-
         public Builder description(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder isSearchable(boolean isSearchable) {
-            this.isSearchable = isSearchable;
+        public Builder dataType(String dataType) {
+            this.dataType = dataType;
+            return this;
+        }
+
+        public Builder searchable(boolean searchable) {
+            this.searchable = searchable;
             return this;
         }
 
@@ -126,11 +153,12 @@ public class Attribute {
 
         Builder(Attribute prototype) {
             id = prototype.id;
+            organizationId = prototype.organizationId;
             trafficTypeId = prototype.trafficTypeId;
-            dataType = prototype.dataType;
             displayName = prototype.displayName;
             description = prototype.description;
-            isSearchable = prototype.isSearchable;
+            dataType = prototype.dataType;
+            searchable = prototype.searchable;
         }
 
         public Attribute build() {

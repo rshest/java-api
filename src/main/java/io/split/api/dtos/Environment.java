@@ -1,5 +1,7 @@
 package io.split.api.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Environment {
     private String id;
     private String name;
@@ -13,10 +15,12 @@ public class Environment {
         this.name = builder.name;
     }
 
+    @JsonProperty
     public String id() {
         return id;
     }
 
+    @JsonProperty
     public String name() {
         return name;
     }
