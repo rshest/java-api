@@ -3,9 +3,10 @@ package io.split.api.dtos;
 public class Attribute {
     private String id;
     private String trafficTypeId;
-    private String name;
     private String dataType;
+    private String displayName;
     private String description;
+    private boolean isSearchable;
 
     public Attribute() {
 
@@ -13,30 +14,35 @@ public class Attribute {
 
     private Attribute(Builder builder) {
         this.id = builder.id;
-        this.name = builder.name;
+        this.displayName = builder.displayName;
         this.dataType = builder.dataType;
         this.description = builder.description;
         this.trafficTypeId = builder.trafficTypeId;
+        this.isSearchable = builder.isSearchable;
     }
 
     public String id() {
         return id;
     }
 
-    public String name() {
-        return name;
+    public String trafficTypeId() {
+        return trafficTypeId;
     }
 
     public String dataType() {
         return dataType;
     }
 
+    public String displayName() {
+        return displayName;
+    }
+
     public String description() {
         return description;
     }
 
-    public String trafficTypeId() {
-        return trafficTypeId;
+    public boolean searchable() {
+        return isSearchable;
     }
 
     public void setId(String id) {
@@ -47,16 +53,20 @@ public class Attribute {
         this.trafficTypeId = trafficTypeId;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setDataType(String dataType) {
         this.dataType = dataType;
     }
 
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setSearchable(boolean searchable) {
+        isSearchable = searchable;
     }
 
     public static Builder builder() {
@@ -69,10 +79,11 @@ public class Attribute {
 
     public static class Builder {
         private String id;
-        private String name;
-        private String dataType;
-        private String description;
         private String trafficTypeId;
+        private String dataType;
+        private String displayName;
+        private String description;
+        private boolean isSearchable;
 
         public Builder id(String id) {
             this.id = id;
@@ -89,8 +100,8 @@ public class Attribute {
             return this;
         }
 
-        public Builder name(String name) {
-            this.name = name;
+        public Builder displayName(String displayName) {
+            this.displayName = displayName;
             return this;
         }
 
@@ -104,16 +115,22 @@ public class Attribute {
             return this;
         }
 
+        public Builder isSearchable(boolean isSearchable) {
+            this.isSearchable = isSearchable;
+            return this;
+        }
+
         Builder() {
 
         }
 
         Builder(Attribute prototype) {
-            trafficTypeId = prototype.trafficTypeId;
             id = prototype.id;
-            name = prototype.name;
+            trafficTypeId = prototype.trafficTypeId;
             dataType = prototype.dataType;
+            displayName = prototype.displayName;
             description = prototype.description;
+            isSearchable = prototype.isSearchable;
         }
 
         public Attribute build() {

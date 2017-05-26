@@ -3,6 +3,7 @@ package io.split.api.dtos;
 public class TrafficType {
     private String id;
     private String name;
+    private String displayAttributeId;
 
     public TrafficType() {
 
@@ -11,6 +12,7 @@ public class TrafficType {
     private TrafficType(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
+        this.displayAttributeId = builder.displayAttributeId;
     }
 
     public String id() {
@@ -21,12 +23,20 @@ public class TrafficType {
         return name;
     }
 
+    public String displayAttributeId() {
+        return displayAttributeId;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setDisplayAttributeId(String displayAttributeId) {
+        this.displayAttributeId = displayAttributeId;
     }
 
     public static Builder builder() {
@@ -40,6 +50,7 @@ public class TrafficType {
     public static class Builder {
         private String id;
         private String name;
+        private String displayAttributeId;
 
         public Builder id(String id) {
             this.id = id;
@@ -51,12 +62,18 @@ public class TrafficType {
             return this;
         }
 
+        public Builder displayAttributeId(String displayAttributeId) {
+            this.displayAttributeId = displayAttributeId;
+            return this;
+        }
+
         Builder() {
         }
 
         Builder(TrafficType prototype) {
             id = prototype.id;
             name = prototype.name;
+            displayAttributeId = prototype.displayAttributeId;
         }
 
         public TrafficType build() {

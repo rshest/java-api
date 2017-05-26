@@ -8,20 +8,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Identity {
+    private String key;
     private String trafficTypeId;
     private String environmentId;
-    private String key;
     private Map<String, String> values;
+    private long timestamp;
 
     public Identity() {
 
     }
 
     private Identity(Builder builder) {
+        this.key = builder.key;
         this.trafficTypeId = builder.trafficTypeId;
         this.environmentId = builder.environmentId;
-        this.key = builder.key;
         this.values = builder.values;
+        this.timestamp = builder.timestamp;
+    }
+
+    public String key() {
+        return key;
     }
 
     public String trafficTypeId() {
@@ -32,12 +38,12 @@ public class Identity {
         return environmentId;
     }
 
-    public String key() {
-        return key;
-    }
-
     public Map<String, String> values() {
         return values;
+    }
+
+    public long timestamp() {
+        return timestamp;
     }
 
     public void setTrafficTypeId(String trafficTypeId) {
@@ -56,6 +62,10 @@ public class Identity {
         this.values = values;
     }
 
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -69,6 +79,7 @@ public class Identity {
         private String environmentId;
         private String key;
         private Map<String, String> values;
+        private long timestamp;
 
         public Builder trafficTypeId(String trafficTypeId) {
             this.trafficTypeId = trafficTypeId;
@@ -92,6 +103,11 @@ public class Identity {
 
         public Builder key(String key) {
             this.key = key;
+            return this;
+        }
+
+        public Builder timestamp(long timestamp) {
+            this.timestamp = timestamp;
             return this;
         }
 
@@ -146,10 +162,11 @@ public class Identity {
         }
 
         Builder(Identity prototype) {
+            key = prototype.key;
             trafficTypeId = prototype.trafficTypeId;
             environmentId = prototype.environmentId;
-            key = prototype.key;
             values = prototype.values;
+            timestamp = prototype.timestamp;
         }
 
         public Identity build() {
