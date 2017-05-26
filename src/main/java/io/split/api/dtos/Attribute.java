@@ -7,6 +7,18 @@ public class Attribute {
     private String dataType;
     private String description;
 
+    public Attribute() {
+
+    }
+
+    private Attribute(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.dataType = builder.dataType;
+        this.description = builder.description;
+        this.trafficTypeId = builder.trafficTypeId;
+    }
+
     public String id() {
         return id;
     }
@@ -27,20 +39,32 @@ public class Attribute {
         return trafficTypeId;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTrafficTypeId(String trafficTypeId) {
+        this.trafficTypeId = trafficTypeId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static Builder builder(Attribute other) {
         return new Builder(other);
-    }
-
-    private Attribute(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.dataType = builder.dataType;
-        this.description = builder.description;
-        this.trafficTypeId = builder.trafficTypeId;
     }
 
     public static class Builder {

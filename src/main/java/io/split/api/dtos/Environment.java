@@ -4,6 +4,15 @@ public class Environment {
     private String id;
     private String name;
 
+    private Environment() {
+
+    }
+
+    private Environment(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+    }
+
     public String id() {
         return id;
     }
@@ -12,17 +21,20 @@ public class Environment {
         return name;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static Builder builder(Environment other) {
         return new Builder(other);
-    }
-
-    private Environment(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
     }
 
     public static class Builder {

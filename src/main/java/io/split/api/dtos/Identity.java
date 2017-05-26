@@ -13,6 +13,17 @@ public class Identity {
     private String key;
     private Map<String, String> values;
 
+    public Identity() {
+
+    }
+
+    private Identity(Builder builder) {
+        this.trafficTypeId = builder.trafficTypeId;
+        this.environmentId = builder.environmentId;
+        this.key = builder.key;
+        this.values = builder.values;
+    }
+
     public String trafficTypeId() {
         return trafficTypeId;
     }
@@ -29,19 +40,28 @@ public class Identity {
         return values;
     }
 
+    public void setTrafficTypeId(String trafficTypeId) {
+        this.trafficTypeId = trafficTypeId;
+    }
+
+    public void setEnvironmentId(String environmentId) {
+        this.environmentId = environmentId;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public void setValues(Map<String, String> values) {
+        this.values = values;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static Builder builder(Identity other) {
         return new Builder(other);
-    }
-
-    private Identity(Builder builder) {
-        this.trafficTypeId = builder.trafficTypeId;
-        this.environmentId = builder.environmentId;
-        this.key = builder.key;
-        this.values = builder.values;
     }
 
     public static class Builder {

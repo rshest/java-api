@@ -4,6 +4,15 @@ public class TrafficType {
     private String id;
     private String name;
 
+    public TrafficType() {
+
+    }
+
+    private TrafficType(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+    }
+
     public String id() {
         return id;
     }
@@ -12,17 +21,20 @@ public class TrafficType {
         return name;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static Builder builder(TrafficType other) {
         return new Builder(other);
-    }
-
-    private TrafficType(Builder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
     }
 
     public static class Builder {
