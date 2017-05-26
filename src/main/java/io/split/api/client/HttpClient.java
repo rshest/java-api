@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -21,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 public class HttpClient {
     private static final Logger _log = LoggerFactory.getLogger(HttpClient.class);
@@ -106,18 +104,42 @@ public class HttpClient {
     }
 
     private URI buildURI(String pathPattern, String... arguments) {
-        String path = String.format(pathPattern, (Object[]) arguments);
-        try {
-            return new URIBuilder(_rootTarget)
-                    .setPath(path)
-                    .build();
-        } catch (URISyntaxException e) {
-            _log.error(String.format(
-                    "Error Executing Request: path=%s",
-                    pathPattern
-            ), e);
-            throw new IllegalStateException(e);
+        String url = concatenateURL(
+                _rootTarget.toString(),
+                String.format(pathPattern, (Object[]) arguments)
+        );
+        return url != null ? URI.create(url) : null;
+    }
+
+
+    public static String concatenateURL(String... urls) {
+        if (urls.length == 0) {
+            return null;
+        } else if (urls.length == 1) {
+            return stripBackslash(urls[0]);
+        } else {
+            StringBuilder builder = new StringBuilder();
+            builder.append(stripBackslash(urls[0]));
+            for (int i = 1; i < urls.length; i++) {
+                builder.append("/");
+                builder.append(stripBackslash(urls[i], true));
+            }
+            return builder.toString();
         }
+    }
+
+    private static String stripBackslash(String url) {
+        return stripBackslash(url, false);
+    }
+
+    private static String stripBackslash(String url, boolean stripStarting) {
+        if (url.endsWith("/")) {
+            url = url.substring(0, url.length() - 1);
+        }
+        if (stripStarting && url.startsWith("/")) {
+            url = url.substring(1, url.length());
+        }
+        return url;
     }
 
     private static StringEntity toJsonEntity(Object obj) {

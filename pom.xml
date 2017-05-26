@@ -23,6 +23,11 @@
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
         </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
+        </dependency>
     </dependencies>
 
     <packaging>jar</packaging>
@@ -101,6 +106,7 @@
                                     <include>io.split.api:*</include>
                                     <include>org.apache.httpcomponents:httpclient</include>
                                     <include>org.apache.httpcomponents:httpcore</include>
+                                    <include>commons-lang:commons-lang</include>
                                     <include>org.slf4j:slf4j-api</include>
                                     <include>com.google.code.gson:gson</include>
                                 </includes>

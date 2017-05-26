@@ -1,5 +1,8 @@
 package io.split.api.dtos;
 
+import org.apache.commons.lang.StringUtils;
+
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,6 +112,12 @@ public class Identity {
 
         public Builder addValue(String name, String value) {
             this.values.put(name, value);
+            return this;
+        }
+
+        public Builder addValue(String name, Collection<String> values) {
+            String concatenatedValue = StringUtils.join(values, ",");
+            this.values.put(name, concatenatedValue);
             return this;
         }
 
