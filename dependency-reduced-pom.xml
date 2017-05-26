@@ -59,6 +59,7 @@
                   <include>io.split.api:*</include>
                   <include>org.apache.httpcomponents:httpclient</include>
                   <include>org.apache.httpcomponents:httpcore</include>
+                  <include>commons-lang:commons-lang</include>
                   <include>org.slf4j:slf4j-api</include>
                   <include>com.google.code.gson:gson</include>
                 </includes>
@@ -168,12 +169,6 @@
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
       <version>1.9</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.5</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
