@@ -1,7 +1,7 @@
 package io.split.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.internal.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
