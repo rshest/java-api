@@ -1,8 +1,11 @@
 package io.split.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.annotation.Nullable;
+import org.apache.commons.lang.StringUtils;
 
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,26 +93,31 @@ public class Identity {
         private String trafficTypeId;
         private String organizationId;
         private String environmentId;
-        private long timestamp = System.currentTimeMillis();
-        private Map<String, String> values = new HashMap<>();
-
-        public Builder key(String key) {
-            this.key = key;
-            return this;
-        }
+        private long timestamp;
+        private Map<String, String> values;
 
         public Builder trafficTypeId(String trafficTypeId) {
             this.trafficTypeId = trafficTypeId;
             return this;
         }
 
-        public Builder organizationId(String organizationId) {
-            this.organizationId = organizationId;
+        public Builder trafficType(TrafficType trafficType) {
+            this.trafficTypeId = trafficType.id();
             return this;
         }
 
         public Builder environmentId(String environmentId) {
             this.environmentId = environmentId;
+            return this;
+        }
+
+        public Builder environment(Environment environment) {
+            this.environmentId = environment.id();
+            return this;
+        }
+
+        public Builder key(String key) {
+            this.key = key;
             return this;
         }
 
@@ -123,8 +131,50 @@ public class Identity {
             return this;
         }
 
-        Builder() {
+        public Builder addValue(String name, boolean value) {
+            this.values.put(name, Boolean.toString(value));
+            return this;
+        }
 
+        public Builder addValue(String name, int value) {
+            this.values.put(name, Integer.toString(value));
+            return this;
+        }
+
+        public Builder addValue(String name, long value) {
+            this.values.put(name, Long.toString(value));
+            return this;
+        }
+
+        public Builder addValue(String name, float value) {
+            this.values.put(name, Float.toString(value));
+            return this;
+        }
+
+        public Builder addValue(String name, double value) {
+            this.values.put(name, Double.toString(value));
+            return this;
+        }
+
+        public Builder addValue(String name, Date value) {
+            this.values.put(name, Long.toString(value.getTime()));
+            return this;
+        }
+
+        public Builder addValue(String name, String value) {
+            this.values.put(name, value);
+            return this;
+        }
+
+        public Builder addValue(String name, Collection<String> values) {
+            String concatenatedValue = StringUtils.join(values, ",");
+            this.values.put(name, concatenatedValue);
+            return this;
+        }
+
+        Builder() {
+            values = new HashMap<>();
+            timestamp = System.currentTimeMillis();
         }
 
         Builder(Identity prototype) {
