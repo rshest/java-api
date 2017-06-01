@@ -2,7 +2,7 @@ package io.split.api.client;
 
 import io.split.api.SplitApiClientConfig;
 import io.split.api.client.interceptors.AddSplitHeadersFilter;
-import io.split.api.client.utils.Json;
+import io.split.api.client.utils.EncodingUtil;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -143,7 +143,7 @@ public class HttpClient {
     }
 
     private static StringEntity toJsonEntity(Object obj) {
-        String json = Json.toJson(obj);
+        String json = EncodingUtil.encode(obj);
         StringEntity entity = new StringEntity(json, "UTF-8");
         entity.setContentType("application/json");
         return entity;

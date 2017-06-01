@@ -2,7 +2,7 @@ package io.split.api.resources;
 
 import io.split.api.dtos.Environment;
 import io.split.api.client.HttpClient;
-import io.split.api.client.utils.Json;
+import io.split.api.client.utils.EncodingUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +16,7 @@ public class EnvironmentClient {
 
     public List<Environment> list() {
         String result = _client.get("/v1/environments");
-        return Json.parseList(result, Environment.class);
+        return EncodingUtil.parseList(result, Environment.class);
     }
 
     public Environment get(String name) {

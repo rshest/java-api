@@ -1,9 +1,9 @@
 package io.split.api.resources;
 
+import io.split.api.client.HttpClient;
+import io.split.api.client.utils.EncodingUtil;
 import io.split.api.dtos.Attribute;
 import io.split.api.dtos.TrafficType;
-import io.split.api.client.HttpClient;
-import io.split.api.client.utils.Json;
 
 import java.util.List;
 
@@ -20,18 +20,19 @@ public class AttributeClient {
 
     public List<Attribute> list(String trafficTypeId) {
         String result = _client.get(
-                "/v1/trafficTypes/{trafficTypeId}/schema",
+                "/v1/trafficTypes/%s/schema",
                 trafficTypeId
         );
-        return Json.parseList(result, Attribute.class);
+        return EncodingUtil.parseList(result, Attribute.class);
     }
 
     public Attribute create(Attribute attribute) {
         String result = _client.put(
-                "/v1/trafficTypes/{trafficTypeId}/schema",
+                attribute,
+                "/v1/trafficTypes/%s/schema",
                 attribute.trafficTypeId()
         );
-        return Json.parse(result, Attribute.class);
+        return EncodingUtil.parse(result, Attribute.class);
     }
 
     public boolean delete(Attribute attribute) {
@@ -39,11 +40,11 @@ public class AttributeClient {
     }
 
     public boolean delete(String trafficTypeId, String attributeId) {
-        String result = _client.get(
-                "/v1/trafficTypes/{trafficTypeId}/schema/{attributeId}",
+        String result = _client.delete(
+                "/v1/trafficTypes/%s/schema/%s",
                 trafficTypeId,
                 attributeId
         );
-        return Json.parse(result, Boolean.class);
+        return EncodingUtil.parse(result, Boolean.class);
     }
 }

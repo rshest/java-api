@@ -3,7 +3,7 @@ package io.split.api.resources;
 import io.split.api.dtos.Identity;
 import io.split.api.dtos.result.ResultDTO;
 import io.split.api.client.HttpClient;
-import io.split.api.client.utils.Json;
+import io.split.api.client.utils.EncodingUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class IdentityClient {
                 identity.environmentId(),
                 identity.key()
         );
-        return Json.parse(result, Identity.class);
+        return EncodingUtil.parse(result, Identity.class);
     }
 
     public ResultDTO<Identity> save(Collection<Identity> identities) {
@@ -65,7 +65,7 @@ public class IdentityClient {
                 trafficTypeId,
                 environmentId
         );
-        return Json.parseResult(result, Identity.class);
+        return EncodingUtil.parseResult(result, Identity.class);
     }
 
     public Identity update(Identity identity) throws NoSuchElementException {
@@ -76,7 +76,7 @@ public class IdentityClient {
                 identity.environmentId(),
                 identity.key()
         );
-        return Json.parse(result, Identity.class);
+        return EncodingUtil.parse(result, Identity.class);
     }
 
     public boolean delete(Identity identity) throws NoSuchElementException {
@@ -90,6 +90,6 @@ public class IdentityClient {
                 environmentId,
                 key
         );
-        return Json.parse(result, Boolean.class);
+        return EncodingUtil.parse(result, Boolean.class);
     }
 }
