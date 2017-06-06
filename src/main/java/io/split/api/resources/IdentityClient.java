@@ -1,16 +1,16 @@
 package io.split.api.resources;
 
+import io.split.api.client.HttpClient;
+import io.split.api.client.exceptions.SplitException;
+import io.split.api.client.utils.EncodingUtil;
 import io.split.api.dtos.Identity;
 import io.split.api.dtos.result.ResultDTO;
-import io.split.api.client.HttpClient;
-import io.split.api.client.utils.EncodingUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 public class IdentityClient {
     private HttpClient _client;
@@ -19,7 +19,7 @@ public class IdentityClient {
         this._client = client;
     }
 
-    public Identity save(Identity identity) {
+    public Identity save(Identity identity) throws SplitException {
         String result = _client.put(
                 identity,
                 "/v1/trafficTypes/%s/environments/%s/identities/%s",
@@ -30,7 +30,7 @@ public class IdentityClient {
         return EncodingUtil.parse(result, Identity.class);
     }
 
-    public ResultDTO<Identity> save(Collection<Identity> identities) {
+    public ResultDTO<Identity> save(Collection<Identity> identities) throws SplitException {
         // Group by Traffic Type & Environment
         Map<String, List<Identity>> groups = new HashMap<>();
         for (Identity identity : identities) {
@@ -58,7 +58,7 @@ public class IdentityClient {
         return result;
     }
 
-    public ResultDTO<Identity> save(String trafficTypeId, String environmentId, List<Identity> identities) {
+    public ResultDTO<Identity> save(String trafficTypeId, String environmentId, List<Identity> identities) throws SplitException {
         String result = _client.post(
                 identities,
                 "/v1/trafficTypes/%s/environments/%s/identities",
@@ -68,7 +68,7 @@ public class IdentityClient {
         return EncodingUtil.parseResult(result, Identity.class);
     }
 
-    public Identity update(Identity identity) throws NoSuchElementException {
+    public Identity update(Identity identity) throws SplitException {
         String result = _client.post(
                 identity,
                 "/v1/trafficTypes/%s/environments/%s/identities/%s/patch",
@@ -79,11 +79,11 @@ public class IdentityClient {
         return EncodingUtil.parse(result, Identity.class);
     }
 
-    public boolean delete(Identity identity) throws NoSuchElementException {
+    public boolean delete(Identity identity) throws SplitException {
         return delete(identity.trafficTypeId(), identity.environmentId(), identity.key());
     }
 
-    public boolean delete(String trafficTypeId, String environmentId, String key) throws NoSuchElementException {
+    public boolean delete(String trafficTypeId, String environmentId, String key) throws SplitException {
         String result = _client.delete(
                 "/v1/trafficTypes/%s/environments/%s/identities/%s",
                 trafficTypeId,

@@ -2,8 +2,6 @@ package io.split.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.annotation.Nullable;
-
 public class Attribute {
     private String id;
     private String organizationId;
@@ -32,37 +30,31 @@ public class Attribute {
         return this.id;
     }
 
-    @Nullable
     @JsonProperty
     public String organizationId() {
         return this.organizationId;
     }
 
-    @Nullable
     @JsonProperty
     public String trafficTypeId() {
         return this.trafficTypeId;
     }
 
-    @Nullable
     @JsonProperty
     public String displayName() {
         return this.displayName;
     }
 
-    @Nullable
     @JsonProperty
     public String description() {
         return this.description;
     }
 
-    @Nullable
     @JsonProperty
     public String dataType() {
         return this.dataType;
     }
 
-    @Nullable
     @JsonProperty("isSearchable")
     public boolean isSearchable() {
         return this.searchable;

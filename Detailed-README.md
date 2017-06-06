@@ -1,6 +1,6 @@
 # Split Java SDK
 
-Java SDK for Split software.
+Java SDK for the Split software API.
 
 ## Installation
 

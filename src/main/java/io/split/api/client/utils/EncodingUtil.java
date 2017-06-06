@@ -4,40 +4,34 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.split.api.client.exceptions.SplitJsonException;
 import io.split.api.dtos.result.ResultDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 public class EncodingUtil {
-    private static final Logger _log = LoggerFactory.getLogger(EncodingUtil.class);
-
     private static final ObjectMapper _mapper = new ObjectMapper();
 
-    public static String encode(Object object) {
+    public static String encode(Object object) throws SplitJsonException {
         try {
             return _mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            _log.error("Error Parsing Response", e);
-            return null;
+            throw new SplitJsonException(e);
         }
     }
 
-    public static <T> T parse(String json, Class<T> objectType) {
+    public static <T> T parse(String json, Class<T> objectType) throws SplitJsonException {
         try {
             return _mapper.readValue(json, objectType);
         } catch (IOException e) {
-            _log.error("Error Parsing Response", e);
-            return null;
+            throw new SplitJsonException(e);
         }
     }
 
-    public static <T> List<T> parseList(String jsonString, Class<T> clazz) {
+    public static <T> List<T> parseList(String jsonString, Class<T> clazz) throws SplitJsonException {
         try {
             Iterator<JsonNode> nodes = _mapper.readValue(jsonString, JsonNode.class).elements();
             List<T> list = new ArrayList<>();
@@ -49,19 +43,17 @@ public class EncodingUtil {
             }
             return list;
         } catch (IOException e) {
-            _log.error("Error Parsing Response", e);
-            return Collections.emptyList();
+            throw new SplitJsonException(e);
         }
     }
 
-    public static <T> ResultDTO<T> parseResult(String jsonString, Class<T> clazz) {
+    public static <T> ResultDTO<T> parseResult(String jsonString, Class<T> clazz) throws SplitJsonException {
         TypeReference resultType = new TypeReference<ResultDTO<T>>() {
         };
         try {
             return _mapper.readValue(jsonString, resultType);
         } catch (IOException e) {
-            _log.error("Error Parsing Response", e);
-            return null;
+            throw new SplitJsonException(e);
         }
     }
 }

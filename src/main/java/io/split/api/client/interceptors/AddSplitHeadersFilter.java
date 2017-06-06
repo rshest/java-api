@@ -1,19 +1,16 @@
 package io.split.api.client.interceptors;
 
 import io.split.api.SplitApiClientConfig;
+import io.split.api.client.exceptions.SplitRequestException;
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.protocol.HttpContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetAddress;
 
 public class AddSplitHeadersFilter implements HttpRequestInterceptor {
-    private static final Logger _log = LoggerFactory.getLogger(AddSplitHeadersFilter.class);
-
     private static final String CLIENT_MACHINE_NAME_HEADER = "SplitSDKMachineName";
     private static final String CLIENT_MACHINE_IP_HEADER = "SplitSDKMachineIP";
     private static final String CLIENT_VERSION = "SplitSDKVersion";
@@ -24,7 +21,7 @@ public class AddSplitHeadersFilter implements HttpRequestInterceptor {
     private final String _hostname;
     private final String _ip;
 
-    public static AddSplitHeadersFilter instance(String apiToken) {
+    public static AddSplitHeadersFilter instance(String apiToken) throws SplitRequestException {
         String hostname = null;
         String ip = null;
 
@@ -33,7 +30,7 @@ public class AddSplitHeadersFilter implements HttpRequestInterceptor {
             hostname = localHost.getHostName();
             ip = localHost.getHostAddress();
         } catch (Exception e) {
-            _log.error("Could not resolve InetAddress", e);
+            throw new SplitRequestException("Could not resolve InetAddress", e);
         }
 
         return new AddSplitHeadersFilter(apiToken, hostname, ip);

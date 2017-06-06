@@ -2,8 +2,6 @@ package io.split.api.dtos.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.annotation.Nullable;
-
 public class FailureDTO<T> {
     private T object;
     private Integer status;
@@ -20,13 +18,11 @@ public class FailureDTO<T> {
         return object;
     }
 
-    @Nullable
     @JsonProperty
     public Integer status() {
         return status;
     }
 
-    @Nullable
     @JsonProperty
     public String message() {
         return message;

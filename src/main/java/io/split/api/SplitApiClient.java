@@ -1,10 +1,10 @@
 package io.split.api;
 
+import io.split.api.client.HttpClient;
 import io.split.api.resources.AttributeClient;
 import io.split.api.resources.EnvironmentClient;
 import io.split.api.resources.IdentityClient;
 import io.split.api.resources.TrafficTypeClient;
-import io.split.api.client.HttpClient;
 
 public class SplitApiClient {
     private final HttpClient _httpClient;

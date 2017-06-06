@@ -3,7 +3,6 @@ package io.split.api.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang.StringUtils;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,19 +35,16 @@ public class Identity {
         return this.key;
     }
 
-    @Nullable
     @JsonProperty
     public String trafficTypeId() {
         return this.trafficTypeId;
     }
 
-    @Nullable
     @JsonProperty
     public String organizationId() {
         return this.organizationId;
     }
 
-    @Nullable
     @JsonProperty
     public String environmentId() {
         return this.environmentId;

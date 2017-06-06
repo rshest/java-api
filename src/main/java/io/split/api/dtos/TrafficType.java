@@ -2,8 +2,6 @@ package io.split.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.annotation.Nullable;
-
 public class TrafficType {
     private String id;
     private String name;
@@ -29,7 +27,6 @@ public class TrafficType {
         return name;
     }
 
-    @Nullable
     @JsonProperty
     public String displayAttributeId() {
         return displayAttributeId;

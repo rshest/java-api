@@ -2,7 +2,6 @@ package io.split.api.dtos.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,13 +23,11 @@ public class ResultDTO<T> {
         return objects;
     }
 
-    @Nullable
     @JsonProperty
     public List<FailureDTO<T>> failed() {
         return failed;
     }
 
-    @Nullable
     @JsonProperty
     public Map<String, String> metadata() {
         return metadata;

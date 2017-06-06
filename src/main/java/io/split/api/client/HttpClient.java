@@ -1,6 +1,11 @@
 package io.split.api.client;
 
 import io.split.api.SplitApiClientConfig;
+import io.split.api.client.exceptions.SplitException;
+import io.split.api.client.exceptions.SplitJsonException;
+import io.split.api.client.exceptions.SplitRequestException;
+import io.split.api.client.exceptions.SplitResourceNotFoundException;
+import io.split.api.client.exceptions.SplitServerErrorException;
 import io.split.api.client.interceptors.AddSplitHeadersFilter;
 import io.split.api.client.utils.EncodingUtil;
 import org.apache.http.client.config.RequestConfig;
@@ -15,19 +20,15 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
 
 public class HttpClient {
-    private static final Logger _log = LoggerFactory.getLogger(HttpClient.class);
-
     private final CloseableHttpClient _client;
     private final URI _rootTarget;
 
-    public HttpClient(String apiToken, SplitApiClientConfig config) {
+    public HttpClient(String apiToken, SplitApiClientConfig config) throws SplitException {
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(config.connectionTimeout())
                 .build();
@@ -44,29 +45,29 @@ public class HttpClient {
         _rootTarget = URI.create(config.endpoint());
     }
 
-    public String get(String path, String... arguments) {
+    public String get(String path, String... arguments) throws SplitRequestException {
         HttpGet request = new HttpGet(buildURI(path, arguments));
         return executeRequest(request);
     }
 
-    public String delete(String path, String... arguments) {
+    public String delete(String path, String... arguments) throws SplitRequestException {
         HttpDelete request = new HttpDelete(buildURI(path, arguments));
         return executeRequest(request);
     }
 
-    public String post(Object entity, String path, String... arguments) {
+    public String post(Object entity, String path, String... arguments) throws SplitException {
         HttpPost request = new HttpPost(buildURI(path, arguments));
         request.setEntity(toJsonEntity(entity));
         return executeRequest(request);
     }
 
-    public String put(Object entity, String path, String... arguments) {
+    public String put(Object entity, String path, String... arguments) throws SplitException {
         HttpPut request = new HttpPut(buildURI(path, arguments));
         request.setEntity(toJsonEntity(entity));
         return executeRequest(request);
     }
 
-    public String executeRequest(HttpRequestBase request) {
+    public String executeRequest(HttpRequestBase request) throws SplitRequestException {
         CloseableHttpResponse response = null;
 
         try {
@@ -81,23 +82,24 @@ public class HttpClient {
                         request.getURI().getPath(),
                         statusCode
                 );
-                _log.error(message);
-                throw new IllegalStateException(message);
+                switch (statusCode) {
+                    case 404:
+                        throw new SplitResourceNotFoundException(message);
+                    case 500:
+                        throw new SplitServerErrorException(message);
+                    default:
+                        throw new SplitRequestException(message);
+                }
             }
 
-            String json = EntityUtils.toString(response.getEntity());
-            if (_log.isDebugEnabled()) {
-                _log.debug("Received json: " + json);
-            }
-
-            return json;
+            return EntityUtils.toString(response.getEntity());
         } catch (Throwable t) {
-            _log.error(String.format(
+            String message = String.format(
                     "Error Executing Request: method=%s path=%s",
                     request.getMethod(),
                     request.getURI().getPath()
-            ), t);
-            throw new IllegalStateException(t);
+            );
+            throw new SplitRequestException(message, t);
         } finally {
             forceClose(response);
         }
@@ -142,7 +144,7 @@ public class HttpClient {
         return url;
     }
 
-    private static StringEntity toJsonEntity(Object obj) {
+    private static StringEntity toJsonEntity(Object obj) throws SplitJsonException {
         String json = EncodingUtil.encode(obj);
         StringEntity entity = new StringEntity(json, "UTF-8");
         entity.setContentType("application/json");
