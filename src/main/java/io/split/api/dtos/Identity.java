@@ -84,11 +84,11 @@ public class Identity {
         this.values = values;
     }
 
-    public Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    public Builder builder(Identity other) {
+    public static Builder builder(Identity other) {
         return new Builder(other);
     }
 
