@@ -84,6 +84,14 @@ public class Identity {
         this.values = values;
     }
 
+    public Builder builder() {
+        return new Builder();
+    }
+
+    public Builder builder(Identity other) {
+        return new Builder(other);
+    }
+
     public static class Builder {
         private String key;
         private String trafficTypeId;
