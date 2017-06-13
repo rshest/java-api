@@ -17,6 +17,7 @@ public class SplitApiClientConfig {
 
     // To be set during startup
     public static String splitSdkVersion;
+    private final int _readTimeout;
 
     public static Builder builder() {
         return new Builder();
@@ -25,9 +26,11 @@ public class SplitApiClientConfig {
     private SplitApiClientConfig(
             String endpoint,
             int connectionTimeout,
+            int readTimeout,
             boolean debugEnabled
     ) {
         _endpoint = endpoint;
+        _readTimeout = readTimeout;
         _connectionTimeout = connectionTimeout;
         _debugEnabled = debugEnabled;
 
@@ -56,10 +59,15 @@ public class SplitApiClientConfig {
         return _debugEnabled;
     }
 
+    public int readTimeout() {
+        return _readTimeout;
+    }
+
     public static final class Builder {
         private String _endpoint = "https://api.split.io";
         private int _connectionTimeout = 15000;
         private boolean _debugEnabled = false;
+        private int _readTimeout = 15000;
 
         public Builder() {
         }
@@ -81,9 +89,19 @@ public class SplitApiClientConfig {
          * @param ms MUST be greater than 0.
          * @return Builder
          */
-
         public Builder connectionTimeout(int ms) {
             _connectionTimeout = ms;
+            return this;
+        }
+
+        /**
+         * Http client read timeout. Default value is 15000ms.
+         *
+         * @param ms MUST be greater than 0.
+         * @return this Builder instance
+         */
+        public Builder readTimeout(int ms) {
+            _readTimeout = ms;
             return this;
         }
 
@@ -104,6 +122,7 @@ public class SplitApiClientConfig {
             return new SplitApiClientConfig(
                     _endpoint,
                     _connectionTimeout,
+                    _readTimeout,
                     _debugEnabled
             );
         }

@@ -15,30 +15,62 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
+import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.net.URI;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 public class HttpClient {
     private final CloseableHttpClient _client;
     private final URI _rootTarget;
 
     public HttpClient(String apiToken, SplitApiClientConfig config) throws SplitException {
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout(config.connectionTimeout())
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContexts.custom()
+                    .useTLS()
+                    .build();
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            throw new RuntimeException("Unable to create support for secure connection.");
+        }
+
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+                sslContext,
+                new String[]{"TLSv1.1", "TLSv1.2"},
+                null,
+                SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+
+        Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.getSocketFactory())
+                .register("https", sslsf)
                 .build();
 
-        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(config.connectionTimeout())
+                .setSocketTimeout(config.readTimeout())
+                .build();
+
+        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
         cm.setMaxTotal(20);
         cm.setDefaultMaxPerRoute(20);
+
         _client = HttpClients.custom()
                 .setConnectionManager(cm)
                 .setDefaultRequestConfig(requestConfig)
+                .setSSLSocketFactory(sslsf)
                 .addInterceptorLast(AddSplitHeadersFilter.instance(apiToken))
                 .build();
 
