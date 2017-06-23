@@ -64,7 +64,7 @@ public class SplitApiClientConfig {
     }
 
     public static final class Builder {
-        private String _endpoint = "https://api.split.io";
+        private String _endpoint = "https://api.split.io/internal/api/v1/";
         private int _connectionTimeout = 15000;
         private boolean _debugEnabled = false;
         private int _readTimeout = 15000;
