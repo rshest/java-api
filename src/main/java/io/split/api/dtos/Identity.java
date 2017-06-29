@@ -161,18 +161,30 @@ public class Identity {
         }
 
         public Builder addValue(String name, Date value) {
-            this.values.put(name, Long.toString(value.getTime()));
+            if (value == null) {
+                values.remove(name);
+            } else {
+                this.values.put(name, Long.toString(value.getTime()));
+            }
             return this;
         }
 
         public Builder addValue(String name, String value) {
-            this.values.put(name, value);
+            if (value == null) {
+                values.remove(name);
+            } else {
+                this.values.put(name, value);
+            }
             return this;
         }
 
         public Builder addValue(String name, Collection<String> values) {
-            String concatenatedValue = StringUtils.join(values, ",");
-            this.values.put(name, concatenatedValue);
+            if (values == null) {
+                values.remove(name);
+            } else {
+                String concatenatedValue = StringUtils.join(values, ",");
+                this.values.put(name, concatenatedValue);
+            }
             return this;
         }
 
