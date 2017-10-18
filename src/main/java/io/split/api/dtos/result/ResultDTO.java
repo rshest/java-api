@@ -1,6 +1,7 @@
 package io.split.api.dtos.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.internal.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,10 @@ public class ResultDTO<T> {
     private List<T> objects;
     private List<FailureDTO<T>> failed;
     private Map<String, String> metadata;
+    private Integer offset;
+    private Integer limit;
+    private Integer count;
+    private Integer total;
 
     public ResultDTO() {
         objects = new ArrayList<>();
@@ -28,6 +33,30 @@ public class ResultDTO<T> {
         return failed;
     }
 
+    @Nullable
+    @JsonProperty
+    public Integer offset() {
+        return offset;
+    }
+
+    @Nullable
+    @JsonProperty
+    public Integer limit() {
+        return limit;
+    }
+
+    @Nullable
+    @JsonProperty
+    public Integer count() {
+        return count;
+    }
+
+    @Nullable
+    @JsonProperty
+    public Integer total() {
+        return total;
+    }
+
     @JsonProperty
     public Map<String, String> metadata() {
         return metadata;
@@ -43,5 +72,21 @@ public class ResultDTO<T> {
 
     public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }
