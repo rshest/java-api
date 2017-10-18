@@ -1,5 +1,6 @@
 package io.split.api.dtos.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.internal.Nullable;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ResultDTO<T> {
     private List<T> objects;
     private List<FailureDTO<T>> failed;
