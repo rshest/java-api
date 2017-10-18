@@ -2,7 +2,6 @@ package io.split.api.dtos.result;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.internal.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,25 +34,21 @@ public class ResultDTO<T> {
         return failed;
     }
 
-    @Nullable
     @JsonProperty
     public Integer offset() {
         return offset;
     }
 
-    @Nullable
     @JsonProperty
     public Integer limit() {
         return limit;
     }
 
-    @Nullable
     @JsonProperty
     public Integer count() {
         return count;
     }
 
-    @Nullable
     @JsonProperty
     public Integer total() {
         return total;
