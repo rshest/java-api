@@ -12,6 +12,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -95,6 +96,12 @@ public class HttpClient {
 
     public String put(Object entity, String path, String... arguments) throws SplitException {
         HttpPut request = new HttpPut(buildURI(path, arguments));
+        request.setEntity(toJsonEntity(entity));
+        return executeRequest(request);
+    }
+
+    public String patch(Object entity, String path, String... arguments) throws SplitException {
+        HttpPatch request = new HttpPatch(buildURI(path, arguments));
         request.setEntity(toJsonEntity(entity));
         return executeRequest(request);
     }
