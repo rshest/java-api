@@ -13,6 +13,8 @@ public class ResultDTO<T> {
     private List<T> objects;
     private List<FailureDTO<T>> failed;
     private Map<String, String> metadata;
+    private Integer offset;
+    private Integer limit;
     private Integer count;
     private Integer total;
 
@@ -30,6 +32,16 @@ public class ResultDTO<T> {
     @JsonProperty
     public List<FailureDTO<T>> failed() {
         return failed;
+    }
+
+    @JsonProperty
+    public Integer offset() {
+        return offset;
+    }
+
+    @JsonProperty
+    public Integer limit() {
+        return limit;
     }
 
     @JsonProperty
@@ -57,6 +69,14 @@ public class ResultDTO<T> {
 
     public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public void setCount(Integer count) {
