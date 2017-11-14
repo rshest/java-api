@@ -136,18 +136,8 @@ public class ResultDTO<T> {
             return this;
         }
 
-        public Builder object(T object) {
-            this.objects.add(object);
-            return this;
-        }
-
         public Builder failed(List<FailureDTO<T>> failed) {
             this.failed = failed;
-            return this;
-        }
-
-        public Builder failed(FailureDTO<T> failed) {
-            this.failed.add(failed);
             return this;
         }
 

@@ -90,11 +90,6 @@ public class ListResultDTO<T> {
             return this;
         }
 
-        public Builder object(T object) {
-            this.objects.add(object);
-            return this;
-        }
-
         Builder() {
             this.objects = new ArrayList<>();
         }

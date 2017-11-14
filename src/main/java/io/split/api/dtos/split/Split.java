@@ -1,7 +1,9 @@
-package io.split.api.dtos;
+package io.split.api.dtos.split;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.split.api.dtos.TrafficType;
+import io.split.api.dtos.URN;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Split {

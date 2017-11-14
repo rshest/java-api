@@ -2,7 +2,7 @@ package io.split.api.resources;
 
 import io.split.api.client.HttpClient;
 import io.split.api.client.utils.EncodingUtil;
-import io.split.api.dtos.Split;
+import io.split.api.dtos.split.Split;
 import io.split.api.dtos.result.ListResultDTO;
 
 public class SplitClient {
