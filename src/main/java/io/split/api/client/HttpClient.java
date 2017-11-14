@@ -109,11 +109,12 @@ public class HttpClient {
 
             if (statusCode < 200 || statusCode >= 300) {
                 String message = String.format(
-                        "Error Executing Request: method=%s path=%s status=%d\n message=%s",
+                        "Error Executing Request: message=%s method=%s path=%s status=%d",
+                        EntityUtils.toString(response.getEntity()),
                         request.getMethod(),
                         request.getURI().getPath(),
-                        statusCode,
-                        EntityUtils.toString(response.getEntity())
+                        statusCode
+
                 );
 
                 switch (statusCode) {
@@ -127,12 +128,13 @@ public class HttpClient {
             }
 
             return EntityUtils.toString(response.getEntity());
+        } catch (SplitRequestException e) {
+            throw e;
         } catch (Throwable t) {
             String message = String.format(
-                    "Error Executing Request: method=%s path=%s message=%s",
+                    "Error Executing Request: method=%s path=%s",
                     request.getMethod(),
-                    request.getURI().getPath(),
-                    t.getMessage()
+                    request.getURI().getPath()
             );
             throw new SplitRequestException(message, t);
         } finally {
