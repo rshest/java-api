@@ -54,7 +54,7 @@ public class Rule {
             return this;
         }
 
-        public Builder Condition(Condition condition) {
+        public Builder condition(Condition condition) {
             this.condition = condition;
             return this;
         }
