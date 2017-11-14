@@ -69,4 +69,31 @@ public class Depends {
             return new Depends(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Depends depends = (Depends) o;
+
+        if (splitName != null ? !splitName.equals(depends.splitName) : depends.splitName != null) return false;
+        return treatments != null ? treatments.equals(depends.treatments) : depends.treatments == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = splitName != null ? splitName.hashCode() : 0;
+        result = 31 * result + (treatments != null ? treatments.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Depends{" +
+                "splitName='" + splitName + '\'' +
+                ", treatments=" + treatments +
+                '}';
+    }
 }

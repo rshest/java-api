@@ -210,4 +210,55 @@ public class Matcher {
             return new Matcher(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Matcher matcher = (Matcher) o;
+
+        if (type != matcher.type) return false;
+        if (negate != null ? !negate.equals(matcher.negate) : matcher.negate != null) return false;
+        if (attribute != null ? !attribute.equals(matcher.attribute) : matcher.attribute != null) return false;
+        if (bool != null ? !bool.equals(matcher.bool) : matcher.bool != null) return false;
+        if (string != null ? !string.equals(matcher.string) : matcher.string != null) return false;
+        if (number != null ? !number.equals(matcher.number) : matcher.number != null) return false;
+        if (date != null ? !date.equals(matcher.date) : matcher.date != null) return false;
+        if (strings != null ? !strings.equals(matcher.strings) : matcher.strings != null) return false;
+        if (between != null ? !between.equals(matcher.between) : matcher.between != null) return false;
+        return depends != null ? depends.equals(matcher.depends) : matcher.depends == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (negate != null ? negate.hashCode() : 0);
+        result = 31 * result + (attribute != null ? attribute.hashCode() : 0);
+        result = 31 * result + (bool != null ? bool.hashCode() : 0);
+        result = 31 * result + (string != null ? string.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (strings != null ? strings.hashCode() : 0);
+        result = 31 * result + (between != null ? between.hashCode() : 0);
+        result = 31 * result + (depends != null ? depends.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Matcher{" +
+                "type=" + type +
+                ", negate=" + negate +
+                ", attribute='" + attribute + '\'' +
+                ", bool=" + bool +
+                ", string='" + string + '\'' +
+                ", number=" + number +
+                ", date=" + date +
+                ", strings=" + strings +
+                ", between=" + between +
+                ", depends=" + depends +
+                '}';
+    }
 }

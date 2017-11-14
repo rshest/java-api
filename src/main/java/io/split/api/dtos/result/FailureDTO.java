@@ -85,4 +85,33 @@ public class FailureDTO<T> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FailureDTO<?> that = (FailureDTO<?>) o;
+
+        if (object != null ? !object.equals(that.object) : that.object != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+        return message != null ? message.equals(that.message) : that.message == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = object != null ? object.hashCode() : 0;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "FailureDTO{" +
+                "object=" + object +
+                ", status=" + status +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

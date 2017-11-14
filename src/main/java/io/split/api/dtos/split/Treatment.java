@@ -103,4 +103,38 @@ public class Treatment {
             return new Treatment(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Treatment treatment = (Treatment) o;
+
+        if (name != null ? !name.equals(treatment.name) : treatment.name != null) return false;
+        if (description != null ? !description.equals(treatment.description) : treatment.description != null)
+            return false;
+        if (keys != null ? !keys.equals(treatment.keys) : treatment.keys != null) return false;
+        return segments != null ? segments.equals(treatment.segments) : treatment.segments == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (keys != null ? keys.hashCode() : 0);
+        result = 31 * result + (segments != null ? segments.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Treatment{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", keys=" + keys +
+                ", segments=" + segments +
+                '}';
+    }
 }

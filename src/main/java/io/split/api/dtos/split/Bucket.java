@@ -68,4 +68,31 @@ public class Bucket {
             return new Bucket(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bucket bucket = (Bucket) o;
+
+        if (treatment != null ? !treatment.equals(bucket.treatment) : bucket.treatment != null) return false;
+        return size != null ? size.equals(bucket.size) : bucket.size == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = treatment != null ? treatment.hashCode() : 0;
+        result = 31 * result + (size != null ? size.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Bucket{" +
+                "treatment='" + treatment + '\'' +
+                ", size=" + size +
+                '}';
+    }
 }

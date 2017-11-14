@@ -114,4 +114,37 @@ public class Split {
             return new Split(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Split{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", trafficType=" + trafficType +
+                ", creationTime=" + creationTime +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Split split = (Split) o;
+
+        if (name != null ? !name.equals(split.name) : split.name != null) return false;
+        if (description != null ? !description.equals(split.description) : split.description != null) return false;
+        if (trafficType != null ? !trafficType.equals(split.trafficType) : split.trafficType != null) return false;
+        return creationTime != null ? creationTime.equals(split.creationTime) : split.creationTime == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (trafficType != null ? trafficType.hashCode() : 0);
+        result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
+        return result;
+    }
 }

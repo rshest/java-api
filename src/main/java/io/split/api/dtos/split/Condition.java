@@ -71,4 +71,31 @@ public class Condition {
             return new Condition(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Condition condition = (Condition) o;
+
+        if (combiner != condition.combiner) return false;
+        return matchers != null ? matchers.equals(condition.matchers) : condition.matchers == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = combiner != null ? combiner.hashCode() : 0;
+        result = 31 * result + (matchers != null ? matchers.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Condition{" +
+                "combiner=" + combiner +
+                ", matchers=" + matchers +
+                '}';
+    }
 }

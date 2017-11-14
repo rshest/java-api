@@ -71,4 +71,31 @@ public class Rule {
             return new Rule(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Rule rule = (Rule) o;
+
+        if (buckets != null ? !buckets.equals(rule.buckets) : rule.buckets != null) return false;
+        return condition != null ? condition.equals(rule.condition) : rule.condition == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = buckets != null ? buckets.hashCode() : 0;
+        result = 31 * result + (condition != null ? condition.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Rule{" +
+                "buckets=" + buckets +
+                ", condition=" + condition +
+                '}';
+    }
 }

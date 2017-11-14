@@ -106,4 +106,36 @@ public class ListResultDTO<T> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ListResultDTO<?> that = (ListResultDTO<?>) o;
+
+        if (objects != null ? !objects.equals(that.objects) : that.objects != null) return false;
+        if (offset != null ? !offset.equals(that.offset) : that.offset != null) return false;
+        if (limit != null ? !limit.equals(that.limit) : that.limit != null) return false;
+        return totalCount != null ? totalCount.equals(that.totalCount) : that.totalCount == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = objects != null ? objects.hashCode() : 0;
+        result = 31 * result + (offset != null ? offset.hashCode() : 0);
+        result = 31 * result + (limit != null ? limit.hashCode() : 0);
+        result = 31 * result + (totalCount != null ? totalCount.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ListResultDTO{" +
+                "objects=" + objects +
+                ", offset=" + offset +
+                ", limit=" + limit +
+                ", totalCount=" + totalCount +
+                '}';
+    }
 }

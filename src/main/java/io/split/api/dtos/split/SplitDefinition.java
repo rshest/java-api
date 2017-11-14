@@ -214,4 +214,57 @@ public class SplitDefinition {
             return new SplitDefinition(this);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SplitDefinition that = (SplitDefinition) o;
+
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (environment != null ? !environment.equals(that.environment) : that.environment != null) return false;
+        if (killed != null ? !killed.equals(that.killed) : that.killed != null) return false;
+        if (treatments != null ? !treatments.equals(that.treatments) : that.treatments != null) return false;
+        if (defaultTreatment != null ? !defaultTreatment.equals(that.defaultTreatment) : that.defaultTreatment != null)
+            return false;
+        if (trafficAllocation != null ? !trafficAllocation.equals(that.trafficAllocation) : that.trafficAllocation != null)
+            return false;
+        if (rules != null ? !rules.equals(that.rules) : that.rules != null) return false;
+        if (defaultRule != null ? !defaultRule.equals(that.defaultRule) : that.defaultRule != null) return false;
+        if (creationTime != null ? !creationTime.equals(that.creationTime) : that.creationTime != null) return false;
+        return lastUpdateTime != null ? lastUpdateTime.equals(that.lastUpdateTime) : that.lastUpdateTime == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (environment != null ? environment.hashCode() : 0);
+        result = 31 * result + (killed != null ? killed.hashCode() : 0);
+        result = 31 * result + (treatments != null ? treatments.hashCode() : 0);
+        result = 31 * result + (defaultTreatment != null ? defaultTreatment.hashCode() : 0);
+        result = 31 * result + (trafficAllocation != null ? trafficAllocation.hashCode() : 0);
+        result = 31 * result + (rules != null ? rules.hashCode() : 0);
+        result = 31 * result + (defaultRule != null ? defaultRule.hashCode() : 0);
+        result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
+        result = 31 * result + (lastUpdateTime != null ? lastUpdateTime.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SplitDefinition{" +
+                "name='" + name + '\'' +
+                ", environment=" + environment +
+                ", killed=" + killed +
+                ", treatments=" + treatments +
+                ", defaultTreatment='" + defaultTreatment + '\'' +
+                ", trafficAllocation=" + trafficAllocation +
+                ", rules=" + rules +
+                ", defaultRule=" + defaultRule +
+                ", creationTime=" + creationTime +
+                ", lastUpdateTime=" + lastUpdateTime +
+                '}';
+    }
 }

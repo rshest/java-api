@@ -171,4 +171,45 @@ public class ResultDTO<T> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ResultDTO<?> resultDTO = (ResultDTO<?>) o;
+
+        if (objects != null ? !objects.equals(resultDTO.objects) : resultDTO.objects != null) return false;
+        if (failed != null ? !failed.equals(resultDTO.failed) : resultDTO.failed != null) return false;
+        if (metadata != null ? !metadata.equals(resultDTO.metadata) : resultDTO.metadata != null) return false;
+        if (offset != null ? !offset.equals(resultDTO.offset) : resultDTO.offset != null) return false;
+        if (limit != null ? !limit.equals(resultDTO.limit) : resultDTO.limit != null) return false;
+        if (count != null ? !count.equals(resultDTO.count) : resultDTO.count != null) return false;
+        return total != null ? total.equals(resultDTO.total) : resultDTO.total == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = objects != null ? objects.hashCode() : 0;
+        result = 31 * result + (failed != null ? failed.hashCode() : 0);
+        result = 31 * result + (metadata != null ? metadata.hashCode() : 0);
+        result = 31 * result + (offset != null ? offset.hashCode() : 0);
+        result = 31 * result + (limit != null ? limit.hashCode() : 0);
+        result = 31 * result + (count != null ? count.hashCode() : 0);
+        result = 31 * result + (total != null ? total.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ResultDTO{" +
+                "objects=" + objects +
+                ", failed=" + failed +
+                ", metadata=" + metadata +
+                ", offset=" + offset +
+                ", limit=" + limit +
+                ", count=" + count +
+                ", total=" + total +
+                '}';
+    }
 }

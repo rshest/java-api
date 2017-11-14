@@ -67,4 +67,31 @@ public class URN {
             return new URN(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "URN{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        URN urn = (URN) o;
+
+        if (id != null ? !id.equals(urn.id) : urn.id != null) return false;
+        return name != null ? name.equals(urn.name) : urn.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

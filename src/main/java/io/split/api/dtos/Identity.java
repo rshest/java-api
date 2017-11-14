@@ -208,4 +208,46 @@ public class Identity {
             return new Identity(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Identity{" +
+                "key='" + key + '\'' +
+                ", trafficTypeId='" + trafficTypeId + '\'' +
+                ", organizationId='" + organizationId + '\'' +
+                ", environmentId='" + environmentId + '\'' +
+                ", timestamp=" + timestamp +
+                ", values=" + values +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Identity identity = (Identity) o;
+
+        if (timestamp != identity.timestamp) return false;
+        if (key != null ? !key.equals(identity.key) : identity.key != null) return false;
+        if (trafficTypeId != null ? !trafficTypeId.equals(identity.trafficTypeId) : identity.trafficTypeId != null)
+            return false;
+        if (organizationId != null ? !organizationId.equals(identity.organizationId) : identity.organizationId != null)
+            return false;
+        if (environmentId != null ? !environmentId.equals(identity.environmentId) : identity.environmentId != null)
+            return false;
+        return values != null ? values.equals(identity.values) : identity.values == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = key != null ? key.hashCode() : 0;
+        result = 31 * result + (trafficTypeId != null ? trafficTypeId.hashCode() : 0);
+        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
+        result = 31 * result + (environmentId != null ? environmentId.hashCode() : 0);
+        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
+        result = 31 * result + (values != null ? values.hashCode() : 0);
+        return result;
+    }
 }
