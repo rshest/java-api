@@ -4,7 +4,7 @@
   <groupId>io.split.api</groupId>
   <artifactId>java-api</artifactId>
   <name>API Client</name>
-  <version>1.0.2</version>
+  <version>2.0.0</version>
   <description>Java SDK for Split's API</description>
   <url>www.split.io</url>
   <developers>
