@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.split.api.client.exceptions.SplitJsonException;
+import io.split.api.dtos.result.ListResultDTO;
 import io.split.api.dtos.result.ResultDTO;
 
 import java.io.IOException;
@@ -56,4 +57,32 @@ public class EncodingUtil {
             throw new SplitJsonException(e);
         }
     }
+
+    public static <T> ListResultDTO<T> parseListResult(String jsonString, Class<T> objectType) {
+        JsonNode node = null;
+        try {
+            node = _mapper.readValue(jsonString, JsonNode.class);
+            Iterator<JsonNode> successfulNodes = node.findValues("objects").get(0).elements();
+            List<T> objects = new ArrayList<>();
+            while (successfulNodes.hasNext()) {
+                JsonNode ni = successfulNodes.next();
+                if (ni.size() > 0) {
+                    objects.add(_mapper.readValue(ni.toString(), objectType));
+                }
+            }
+            int offset = node.findValue("offset").asInt();
+            int limit = node.findValue("limit").asInt();
+            long totalCount = node.findValue("totalCount").asLong();
+            return ListResultDTO
+                    .builder()
+                    .limit(limit)
+                    .offset(offset)
+                    .totalCount(totalCount)
+                    .objects(objects)
+                    .build();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Error parsing result", e);
+        }
+    }
+
 }

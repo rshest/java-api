@@ -109,11 +109,13 @@ public class HttpClient {
 
             if (statusCode < 200 || statusCode >= 300) {
                 String message = String.format(
-                        "Error Executing Request: method=%s path=%s status=%d",
+                        "Error Executing Request: method=%s path=%s status=%d\n message=%s",
                         request.getMethod(),
                         request.getURI().getPath(),
-                        statusCode
+                        statusCode,
+                        EntityUtils.toString(response.getEntity())
                 );
+
                 switch (statusCode) {
                     case 404:
                         throw new SplitResourceNotFoundException(message);
@@ -127,9 +129,10 @@ public class HttpClient {
             return EntityUtils.toString(response.getEntity());
         } catch (Throwable t) {
             String message = String.format(
-                    "Error Executing Request: method=%s path=%s",
+                    "Error Executing Request: method=%s path=%s message=%s",
                     request.getMethod(),
-                    request.getURI().getPath()
+                    request.getURI().getPath(),
+                    t.getMessage()
             );
             throw new SplitRequestException(message, t);
         } finally {
