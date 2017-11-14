@@ -1,10 +1,12 @@
 package io.split.api.dtos.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ListResultDTO<T> {
     private List<T> objects;
     private Integer offset;
@@ -16,10 +18,10 @@ public class ListResultDTO<T> {
     }
 
     public ListResultDTO(Builder builder) {
-        this.objects = builder.objects;
-        this.offset = builder.offset;
-        this.limit = builder.limit;
-        this.totalCount = builder.totalCount;
+        objects = builder.objects;
+        offset = builder.offset;
+        limit = builder.limit;
+        totalCount = builder.totalCount;
     }
 
     @JsonProperty
@@ -46,12 +48,12 @@ public class ListResultDTO<T> {
         this.objects = objects;
     }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
     public void setOffset(Integer offset) {
         this.offset = offset;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public void setTotalCount(Long totalCount) {
@@ -94,7 +96,7 @@ public class ListResultDTO<T> {
         }
 
         Builder() {
-            this.objects = new ArrayList<T>();
+            this.objects = new ArrayList<>();
         }
 
         Builder(ListResultDTO prototype) {
@@ -105,7 +107,7 @@ public class ListResultDTO<T> {
         }
 
         public ListResultDTO<T> build() {
-            return new ListResultDTO(this);
+            return new ListResultDTO<>(this);
         }
     }
 

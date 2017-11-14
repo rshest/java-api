@@ -4,7 +4,7 @@
   <groupId>io.split.api</groupId>
   <artifactId>java-api</artifactId>
   <name>API Client</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <description>Java SDK for Split's API</description>
   <url>www.split.io</url>
   <developers>
@@ -120,7 +120,6 @@
         <plugins>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.4</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
