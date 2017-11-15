@@ -32,6 +32,10 @@ public class SplitDefinitionClient {
         return EncodingUtil.parse(result, Boolean.class);
     }
 
+    public ListResultDTO<SplitDefinition> list(String environmentNameOrId) {
+        return list(environmentNameOrId, null, null);
+    }
+
     public ListResultDTO<SplitDefinition> list(String environmentNameOrId,
                                                         Integer offset, Integer limit) {
         String queryParams = (offset != null ? String.format("offset=%s", offset) : "")
