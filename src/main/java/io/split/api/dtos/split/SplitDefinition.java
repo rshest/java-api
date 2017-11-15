@@ -10,6 +10,7 @@ import java.util.List;
 public class SplitDefinition {
     private String name;
     private URN environment;
+    private URN trafficType;
     private Boolean killed;
     private List<Treatment> treatments;
     private String defaultTreatment;
@@ -33,6 +34,7 @@ public class SplitDefinition {
         this.defaultRule = builder.defaultRule;
         this.creationTime = builder.creationTime;
         this.lastUpdateTime = builder.lastUpdateTime;
+        this.trafficType = builder.trafficType;
     }
 
     @JsonProperty
@@ -43,6 +45,11 @@ public class SplitDefinition {
     @JsonProperty
     public URN environment() {
         return this.environment;
+    }
+
+    @JsonProperty
+    public URN trafficType() {
+        return this.trafficType;
     }
 
     @JsonProperty
@@ -93,6 +100,10 @@ public class SplitDefinition {
         this.environment = environment;
     }
 
+    public void setTrafficType(URN trafficType) {
+        this.trafficType = trafficType;
+    }
+
     public void setKilled(Boolean killed) {
         this.killed = killed;
     }
@@ -136,6 +147,7 @@ public class SplitDefinition {
     public static class Builder {
         private String name;
         private URN environment;
+        private URN trafficType;
         private Boolean killed;
         private List<Treatment> treatments;
         private String defaultTreatment;
@@ -152,6 +164,11 @@ public class SplitDefinition {
 
         public Builder environment(URN environment) {
             this.environment = environment;
+            return this;
+        }
+
+        public Builder trafficType(URN trafficType) {
+            this.trafficType = trafficType;
             return this;
         }
 
@@ -208,6 +225,7 @@ public class SplitDefinition {
             defaultRule = prototype.defaultRule;
             creationTime = prototype.creationTime;
             lastUpdateTime = prototype.lastUpdateTime;
+            trafficType = prototype.trafficType;
         }
 
         public SplitDefinition build() {
@@ -224,6 +242,7 @@ public class SplitDefinition {
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (environment != null ? !environment.equals(that.environment) : that.environment != null) return false;
+        if (trafficType != null ? !trafficType.equals(that.trafficType) : that.trafficType != null) return false;
         if (killed != null ? !killed.equals(that.killed) : that.killed != null) return false;
         if (treatments != null ? !treatments.equals(that.treatments) : that.treatments != null) return false;
         if (defaultTreatment != null ? !defaultTreatment.equals(that.defaultTreatment) : that.defaultTreatment != null)
@@ -241,6 +260,7 @@ public class SplitDefinition {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (environment != null ? environment.hashCode() : 0);
+        result = 31 * result + (trafficType != null ? trafficType.hashCode() : 0);
         result = 31 * result + (killed != null ? killed.hashCode() : 0);
         result = 31 * result + (treatments != null ? treatments.hashCode() : 0);
         result = 31 * result + (defaultTreatment != null ? defaultTreatment.hashCode() : 0);
@@ -257,6 +277,7 @@ public class SplitDefinition {
         return "SplitDefinition{" +
                 "name='" + name + '\'' +
                 ", environment=" + environment +
+                ", trafficType=" + trafficType +
                 ", killed=" + killed +
                 ", treatments=" + treatments +
                 ", defaultTreatment='" + defaultTreatment + '\'' +
