@@ -1,4 +1,6 @@
 NEWS
+1.1.0
+- Adding support for Split and Split Definition API calls
 
 1.0.0
 - Initial release
