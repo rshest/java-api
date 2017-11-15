@@ -24,6 +24,10 @@
             <name>Henry Jewkes</name>
             <email>henry@split.io</email>
         </developer>
+        <developer>
+            <name>Fernando Martin</name>
+            <email>fernando@split.io</email>
+        </developer>
     </developers>
     <licenses>
         <license>
