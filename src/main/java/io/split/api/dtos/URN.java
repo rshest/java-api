@@ -4,19 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TrafficType {
+public class URN {
     private String id;
     private String name;
-    private String displayAttributeId;
 
-    public TrafficType() {
+    public URN() { }
 
-    }
-
-    private TrafficType(Builder builder) {
+    private URN(URN.Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
-        this.displayAttributeId = builder.displayAttributeId;
     }
 
     @JsonProperty
@@ -29,35 +25,26 @@ public class TrafficType {
         return name;
     }
 
-    @JsonProperty
-    public String displayAttributeId() {
-        return displayAttributeId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDisplayAttributeId(String displayAttributeId) {
-        this.displayAttributeId = displayAttributeId;
-    }
-
     public static Builder builder() {
         return new Builder();
     }
 
-    public static Builder builder(TrafficType other) {
+    public static Builder builder(URN other) {
         return new Builder(other);
     }
+
 
     public static class Builder {
         private String id;
         private String name;
-        private String displayAttributeId;
 
         public Builder id(String id) {
             this.id = id;
@@ -69,31 +56,23 @@ public class TrafficType {
             return this;
         }
 
-        public Builder displayAttributeId(String displayAttributeId) {
-            this.displayAttributeId = displayAttributeId;
-            return this;
-        }
+        Builder() { }
 
-        Builder() {
-        }
-
-        Builder(TrafficType prototype) {
+        Builder(URN prototype) {
             id = prototype.id;
             name = prototype.name;
-            displayAttributeId = prototype.displayAttributeId;
         }
 
-        public TrafficType build() {
-            return new TrafficType(this);
+        public URN build() {
+            return new URN(this);
         }
     }
 
     @Override
     public String toString() {
-        return "TrafficType{" +
+        return "URN{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", displayAttributeId='" + displayAttributeId + '\'' +
                 '}';
     }
 
@@ -102,11 +81,10 @@ public class TrafficType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TrafficType that = (TrafficType) o;
+        URN urn = (URN) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        return displayAttributeId != null ? displayAttributeId.equals(that.displayAttributeId) : that.displayAttributeId == null;
+        if (id != null ? !id.equals(urn.id) : urn.id != null) return false;
+        return name != null ? name.equals(urn.name) : urn.name == null;
 
     }
 
@@ -114,7 +92,6 @@ public class TrafficType {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (displayAttributeId != null ? displayAttributeId.hashCode() : 0);
         return result;
     }
 }

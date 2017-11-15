@@ -12,6 +12,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -99,6 +100,12 @@ public class HttpClient {
         return executeRequest(request);
     }
 
+    public String patch(Object entity, String path, String... arguments) throws SplitException {
+        HttpPatch request = new HttpPatch(buildURI(path, arguments));
+        request.setEntity(toJsonEntity(entity));
+        return executeRequest(request);
+    }
+
     public String executeRequest(HttpRequestBase request) throws SplitRequestException {
         CloseableHttpResponse response = null;
 
@@ -109,11 +116,14 @@ public class HttpClient {
 
             if (statusCode < 200 || statusCode >= 300) {
                 String message = String.format(
-                        "Error Executing Request: method=%s path=%s status=%d",
+                        "Error Executing Request: message=%s method=%s path=%s status=%d",
+                        EntityUtils.toString(response.getEntity()),
                         request.getMethod(),
                         request.getURI().getPath(),
                         statusCode
+
                 );
+
                 switch (statusCode) {
                     case 404:
                         throw new SplitResourceNotFoundException(message);
@@ -125,6 +135,8 @@ public class HttpClient {
             }
 
             return EntityUtils.toString(response.getEntity());
+        } catch (SplitRequestException e) {
+            throw e;
         } catch (Throwable t) {
             String message = String.format(
                     "Error Executing Request: method=%s path=%s",

@@ -160,4 +160,50 @@ public class Attribute {
             return new Attribute(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Attribute{" +
+                "id='" + id + '\'' +
+                ", organizationId='" + organizationId + '\'' +
+                ", trafficTypeId='" + trafficTypeId + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", description='" + description + '\'' +
+                ", dataType='" + dataType + '\'' +
+                ", searchable=" + searchable +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Attribute attribute = (Attribute) o;
+
+        if (searchable != attribute.searchable) return false;
+        if (id != null ? !id.equals(attribute.id) : attribute.id != null) return false;
+        if (organizationId != null ? !organizationId.equals(attribute.organizationId) : attribute.organizationId != null)
+            return false;
+        if (trafficTypeId != null ? !trafficTypeId.equals(attribute.trafficTypeId) : attribute.trafficTypeId != null)
+            return false;
+        if (displayName != null ? !displayName.equals(attribute.displayName) : attribute.displayName != null)
+            return false;
+        if (description != null ? !description.equals(attribute.description) : attribute.description != null)
+            return false;
+        return dataType != null ? dataType.equals(attribute.dataType) : attribute.dataType == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (organizationId != null ? organizationId.hashCode() : 0);
+        result = 31 * result + (trafficTypeId != null ? trafficTypeId.hashCode() : 0);
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (dataType != null ? dataType.hashCode() : 0);
+        result = 31 * result + (searchable ? 1 : 0);
+        return result;
+    }
 }

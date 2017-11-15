@@ -1,5 +1,8 @@
 CHANGES
 
+1.1.0
+- Adding support for Split and Split Definition API calls.
+
 1.0.1
 - Supporting backwards compatibility for changes to JSON objects
 

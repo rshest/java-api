@@ -1,9 +1,6 @@
 package io.split.api;
 
 
-import java.io.IOException;
-import java.util.Properties;
-
 /**
  * Configurations for the SplitClient.
  *
@@ -15,8 +12,6 @@ public class SplitApiClientConfig {
     private final int _connectionTimeout;
     private final boolean _debugEnabled;
 
-    // To be set during startup
-    public static String splitSdkVersion;
     private final int _readTimeout;
 
     public static Builder builder() {
@@ -33,18 +28,6 @@ public class SplitApiClientConfig {
         _readTimeout = readTimeout;
         _connectionTimeout = connectionTimeout;
         _debugEnabled = debugEnabled;
-
-        Properties props = new Properties();
-        try {
-            props.load(this.getClass().getClassLoader().getResourceAsStream("version.properties"));
-        } catch (IOException e) {
-            throw new IllegalStateException("cannot find client version in classpath", e);
-        }
-        splitSdkVersion = "undefined";
-
-        if (props.getProperty("sdk.version") != null) {
-            splitSdkVersion = "java-" + props.getProperty("sdk.version");
-        }
     }
 
     public String endpoint() {
@@ -64,7 +47,7 @@ public class SplitApiClientConfig {
     }
 
     public static final class Builder {
-        private String _endpoint = "https://api.split.io/internal/api/v1/";
+        private String _endpoint = "https://api.split.io/internal/api";
         private int _connectionTimeout = 15000;
         private boolean _debugEnabled = false;
         private int _readTimeout = 15000;

@@ -6,7 +6,7 @@
 
     <groupId>io.split.api</groupId>
     <artifactId>java-api</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>API Client</name>
     <description>Java SDK for Split's API</description>
@@ -23,6 +23,10 @@
         <developer>
             <name>Henry Jewkes</name>
             <email>henry@split.io</email>
+        </developer>
+        <developer>
+            <name>Fernando Martin</name>
+            <email>fernando@split.io</email>
         </developer>
     </developers>
     <licenses>
