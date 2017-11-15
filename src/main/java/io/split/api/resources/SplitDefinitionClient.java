@@ -1,7 +1,6 @@
 package io.split.api.resources;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jsonpatch.JsonPatch;
 import io.split.api.client.HttpClient;
 import io.split.api.client.utils.EncodingUtil;
 import io.split.api.dtos.result.ListResultDTO;
@@ -47,8 +46,7 @@ public class SplitDefinitionClient {
     public SplitDefinition update(String environmentNameOrId,
                                           String name,
                                           JsonNode modify) throws IOException {
-        JsonPatch jsonPatch = JsonPatch.fromJson(modify);
-        String result = _client.patch(jsonPatch, "/v1/splits/%s/environments/%s", name, environmentNameOrId);
+        String result = _client.patch(modify, "/v1/splits/%s/environments/%s", name, environmentNameOrId);
         return EncodingUtil.parse(result, SplitDefinition.class);
     }
 
