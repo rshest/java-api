@@ -4,6 +4,7 @@ import io.split.api.client.HttpClient;
 import io.split.api.resources.AttributeClient;
 import io.split.api.resources.EnvironmentClient;
 import io.split.api.resources.IdentityClient;
+import io.split.api.resources.SegmentDefinitionClient;
 import io.split.api.resources.SplitClient;
 import io.split.api.resources.SplitDefinitionClient;
 import io.split.api.resources.TrafficTypeClient;
@@ -17,6 +18,7 @@ public class SplitApiClient {
     private final IdentityClient identityClient;
     private final SplitClient splitClient;
     private final SplitDefinitionClient splitDefinitionClient;
+    private final SegmentDefinitionClient segmentDefinitionClient;
 
     public static SplitApiClient client(String apiToken) {
         return client(apiToken, SplitApiClientConfig.builder().build());
@@ -35,6 +37,7 @@ public class SplitApiClient {
         identityClient = new IdentityClient(_httpClient);
         splitClient = new SplitClient(_httpClient);
         splitDefinitionClient = new SplitDefinitionClient(_httpClient);
+        segmentDefinitionClient = new SegmentDefinitionClient(_httpClient);
     }
 
     public TrafficTypeClient trafficTypes() {
@@ -61,4 +64,7 @@ public class SplitApiClient {
         return splitDefinitionClient;
     }
 
+    public SegmentDefinitionClient segmentDefinition() {
+        return segmentDefinitionClient;
+    }
 }
