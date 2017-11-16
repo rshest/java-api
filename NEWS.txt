@@ -1,4 +1,8 @@
 NEWS
+
+1.1.1
+- Adding support for Segment Definition API call
+
 1.1.0
 - Adding support for Split and Split Definition API calls
 
