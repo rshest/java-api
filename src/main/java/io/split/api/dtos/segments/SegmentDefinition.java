@@ -91,31 +91,6 @@ public class SegmentDefinition {
             return this;
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Builder builder = (Builder) o;
-
-            if (name != null ? !name.equals(builder.name) : builder.name != null) return false;
-            if (environment != null ? !environment.equals(builder.environment) : builder.environment != null)
-                return false;
-            if (trafficType != null ? !trafficType.equals(builder.trafficType) : builder.trafficType != null)
-                return false;
-            return creationTime != null ? creationTime.equals(builder.creationTime) : builder.creationTime == null;
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = name != null ? name.hashCode() : 0;
-            result = 31 * result + (environment != null ? environment.hashCode() : 0);
-            result = 31 * result + (trafficType != null ? trafficType.hashCode() : 0);
-            result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
-            return result;
-        }
-
         Builder() { }
 
         Builder(SegmentDefinition prototype) {
@@ -131,6 +106,29 @@ public class SegmentDefinition {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SegmentDefinition that = (SegmentDefinition) o;
+
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (environment != null ? !environment.equals(that.environment) : that.environment != null) return false;
+        if (trafficType != null ? !trafficType.equals(that.trafficType) : that.trafficType != null) return false;
+        return creationTime != null ? creationTime.equals(that.creationTime) : that.creationTime == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (environment != null ? environment.hashCode() : 0);
+        result = 31 * result + (trafficType != null ? trafficType.hashCode() : 0);
+        result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "SegmentDefinition{" +
                 "name='" + name + '\'' +
@@ -139,4 +137,6 @@ public class SegmentDefinition {
                 ", creationTime=" + creationTime +
                 '}';
     }
+
+
 }
