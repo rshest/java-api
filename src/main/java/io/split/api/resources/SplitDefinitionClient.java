@@ -53,7 +53,7 @@ public class SplitDefinitionClient {
     public SplitDefinition update(String environmentNameOrId,
                                   String name,
                                   SplitDefinition splitDefinition) throws IOException {
-        String result = _client.put(splitDefinition, "/v1/splits/%s/environments/%s/fullUpdate", name, environmentNameOrId);
+        String result = _client.put(splitDefinition, "/v1/splits/%s/environments/%s", name, environmentNameOrId);
         return EncodingUtil.parse(result, SplitDefinition.class);
     }
 
