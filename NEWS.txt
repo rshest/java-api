@@ -1,5 +1,8 @@
 NEWS
 
+1.1.2
+  Support for Split Tags and full update endpoint.
+
 1.1.1
 - Adding support for Segment Definition API call
 
