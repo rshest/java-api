@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.split.api.dtos.TrafficType;
 import io.split.api.dtos.URN;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -23,7 +24,9 @@ public class Split {
         this.description = builder.description;
         this.creationTime = builder.creationTime;
         this.trafficType = builder.trafficType;
-        this.tags = builder.tags;
+        if (builder.tags != null) {
+            this.tags = new ArrayList<>(builder.tags);
+        }
     }
 
     @JsonProperty

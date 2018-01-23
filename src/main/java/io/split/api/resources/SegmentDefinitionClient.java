@@ -20,7 +20,7 @@ public class SegmentDefinitionClient {
     public ListResultDTO<SegmentDefinition> list(String environmentNameOrId,
                                                         Integer offset, Integer limit) {
         String queryParams = (offset != null ? String.format("offset=%s", offset) : "")
-                + (limit != null  ? String.format("&limit=%s", limit): "");
+                + (limit != null  ? String.format("&limit=%s", limit) : "");
         String result = _client.get("/v1/segments/environments/%s?%s", environmentNameOrId, queryParams);
         return EncodingUtil.parseListResult(result, SegmentDefinition.class);
     }
