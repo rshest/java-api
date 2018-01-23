@@ -5,12 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.split.api.dtos.TrafficType;
 import io.split.api.dtos.URN;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Split {
     private String name;
     private String description;
     private URN trafficType;
     private Long creationTime;
+    private List<URN> tags;
 
     public Split() {
     }
@@ -20,6 +24,9 @@ public class Split {
         this.description = builder.description;
         this.creationTime = builder.creationTime;
         this.trafficType = builder.trafficType;
+        if (builder.tags != null) {
+            this.tags = new ArrayList<>(builder.tags);
+        }
     }
 
     @JsonProperty
@@ -54,6 +61,10 @@ public class Split {
         this.trafficType = trafficType;
     }
 
+    public void setTags(List<URN> tags) {
+        this.tags = tags;
+    }
+
     public void setCreationTime(Long creationTime) {
         this.creationTime = creationTime != null ? creationTime : System.currentTimeMillis();
     }
@@ -71,6 +82,7 @@ public class Split {
         private String description;
         private URN trafficType;
         private Long creationTime;
+        private List<URN> tags;
 
         public Builder name(String name) {
             this.name = name;
@@ -101,6 +113,11 @@ public class Split {
             return this;
         }
 
+        public Builder tags(List<URN> tags) {
+            this.tags = tags;
+            return this;
+        }
+
         Builder() { }
 
         Builder(Split prototype) {
@@ -108,6 +125,7 @@ public class Split {
             description = prototype.description;
             trafficType = prototype.trafficType;
             creationTime = prototype.creationTime;
+            tags = prototype.tags;
         }
 
         public Split build() {
@@ -122,6 +140,7 @@ public class Split {
                 ", description='" + description + '\'' +
                 ", trafficType=" + trafficType +
                 ", creationTime=" + creationTime +
+                ", tags=" + tags +
                 '}';
     }
 
@@ -135,7 +154,8 @@ public class Split {
         if (name != null ? !name.equals(split.name) : split.name != null) return false;
         if (description != null ? !description.equals(split.description) : split.description != null) return false;
         if (trafficType != null ? !trafficType.equals(split.trafficType) : split.trafficType != null) return false;
-        return creationTime != null ? creationTime.equals(split.creationTime) : split.creationTime == null;
+        if (creationTime != null ? !creationTime.equals(split.creationTime) : split.creationTime != null) return false;
+        return tags != null ? tags.equals(split.tags) : split.tags == null;
 
     }
 
@@ -145,6 +165,7 @@ public class Split {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (trafficType != null ? trafficType.hashCode() : 0);
         result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
         return result;
     }
 }

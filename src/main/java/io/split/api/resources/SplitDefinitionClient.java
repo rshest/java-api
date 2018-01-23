@@ -50,6 +50,13 @@ public class SplitDefinitionClient {
         return EncodingUtil.parse(result, SplitDefinition.class);
     }
 
+    public SplitDefinition update(String environmentNameOrId,
+                                  String name,
+                                  SplitDefinition splitDefinition) throws IOException {
+        String result = _client.put(splitDefinition, "/v1/splits/%s/environments/%s", name, environmentNameOrId);
+        return EncodingUtil.parse(result, SplitDefinition.class);
+    }
+
     public Boolean kill(String environmentNameOrId, String name) {
         String result = _client.put(null, "/v1/splits/%s/environments/%s/kill", name, environmentNameOrId);
         return EncodingUtil.parse(result, Boolean.class);
